@@ -6,7 +6,7 @@ public class Buku {
     String pengarang;
     String penerbit;
     int tahun;
-
+    
     public Buku(int id, String judul, String pengarang, String penerbit,int tahun) {
         this.id = id;
         this.judul = judul;
