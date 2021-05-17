@@ -35,16 +35,19 @@ public class DaftarBuku extends javax.swing.JFrame {
     
     
     public static void tambahBuku(String id,String judul,String pengarang,String penerbit,String tahun){
-        DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
-        buku [top][0] = id;
-        buku [top][1] = judul;
-        buku [top][2] = pengarang;
-        buku [top][3] = penerbit;
-        buku [top][4] = tahun;        
-        Object[]row ={buku [top][0],buku [top][1],buku [top][2],buku [top][3],buku [top][4]};
-        model.addRow(row);
-        top++;
-        tabelBuku.setModel(model);
+        try {    
+            DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
+            buku [top][0] = id;
+            buku [top][1] = judul;
+            buku [top][2] = pengarang;
+            buku [top][3] = penerbit;
+            buku [top][4] = tahun;        
+            Object[]row ={buku [top][0],buku [top][1],buku [top][2],buku [top][3],buku [top][4]};
+            model.addRow(row);
+            top++;
+            tabelBuku.setModel(model);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! "+e);}
     }
     
     public static void hapusBuku(String id){
@@ -421,11 +424,15 @@ public class DaftarBuku extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void pilihCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihCbActionPerformed
-        int indexComboBox = pilihCb.getSelectedIndex();
-        if(indexComboBox==1){
-            insertionSort(buku, "0");
-        }else if(indexComboBox==2){
-            insertionSort(buku, "4");
+        try {
+            int indexComboBox = pilihCb.getSelectedIndex();
+            if(indexComboBox==1){
+                insertionSort(buku, "0");
+            }else if(indexComboBox==2){
+                insertionSort(buku, "4");
+            }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ID Buku/Tahun ada yang kosong!\nHarap edit dahulu!");
         }
     }//GEN-LAST:event_pilihCbActionPerformed
 
