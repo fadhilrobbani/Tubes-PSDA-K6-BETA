@@ -117,7 +117,7 @@ public class DaftarBuku extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         exitButton = new javax.swing.JLabel();
         minimizeButton = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        pilihCb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -290,14 +290,14 @@ public class DaftarBuku extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(102, 102, 102));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Sort by ID Buku");
-        jButton1.setFocusable(false);
-        jButton1.setOpaque(true);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        pilihCb.setBackground(new java.awt.Color(102, 102, 102));
+        pilihCb.setForeground(new java.awt.Color(255, 255, 255));
+        pilihCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Urut Berdasarkan:", "ID Buku", "Tahun" }));
+        pilihCb.setFocusable(false);
+        pilihCb.setOpaque(true);
+        pilihCb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                pilihCbActionPerformed(evt);
             }
         });
 
@@ -307,8 +307,8 @@ public class DaftarBuku extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(163, 163, 163)
+                .addComponent(pilihCb, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addComponent(minimizeButton)
@@ -325,7 +325,7 @@ public class DaftarBuku extends javax.swing.JFrame {
                     .addComponent(exitButton)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(jButton1)))
+                        .addComponent(pilihCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -401,9 +401,14 @@ public class DaftarBuku extends javax.swing.JFrame {
         this.setLocation(koordinatX-mouseX, koordinatY-mouseY);
     }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        insertionSort(buku,"0");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void pilihCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihCbActionPerformed
+        int indexComboBox = pilihCb.getSelectedIndex();
+        if(indexComboBox==1){
+            insertionSort(buku, "0");
+        }else if(indexComboBox==2){
+            insertionSort(buku, "4");
+        }
+    }//GEN-LAST:event_pilihCbActionPerformed
 
     /**
      * @param args the command line arguments
@@ -444,7 +449,6 @@ public class DaftarBuku extends javax.swing.JFrame {
     private javax.swing.JButton editButton;
     private javax.swing.JLabel exitButton;
     private javax.swing.JButton hapusButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -452,6 +456,7 @@ public class DaftarBuku extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logoutButton;
     private javax.swing.JLabel minimizeButton;
+    private javax.swing.JComboBox<String> pilihCb;
     private static javax.swing.JTable tabelBuku;
     private javax.swing.JButton tambahButton;
     private javax.swing.JLabel user;
