@@ -9,10 +9,12 @@ public class Hapus extends javax.swing.JFrame {
     int mouseX;
     int mouseY;
 
+    //method kosongkan form idField
     public void kosongkanForm(){
         idField.setText(null);   
     }
     
+    //constructor untuk class Hapus
     public Hapus() {
         initComponents();
     }
@@ -190,6 +192,7 @@ public class Hapus extends javax.swing.JFrame {
         this.setExtendedState(Hapus.ICONIFIED);
     }//GEN-LAST:event_headerMouseClicked
 
+    //dua method dibawah untuk menggeser window
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
         int koordinatX = evt.getXOnScreen();
         int koordinatY = evt.getYOnScreen();
@@ -201,19 +204,24 @@ public class Hapus extends javax.swing.JFrame {
         mouseY = evt.getY();
     }//GEN-LAST:event_jPanel2MousePressed
 
+    //method tombol reset
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
        kosongkanForm();
     }//GEN-LAST:event_resetButtonActionPerformed
 
+    //method tombol hapus
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
         String id = idField.getText();
         DaftarBuku.hapusBuku(id);
         ImageIcon icon = new ImageIcon("src/resources/success.png");
+        //seleksi if jika cek di class DaftarBuku bernilai true maka data sukses dihapus
+        //jika false maka indeks tidak tersedia
         if(DaftarBuku.cek == true){
             JOptionPane.showMessageDialog(null, "Data berhasil Dihapus!", "Hapus Buku", 0, icon);
         }else{
              JOptionPane.showMessageDialog(null, "Indeks yang dimasukkan tidak tersedia!");
         }
+        //atur nilai cek ke false lagi agar kembali ke nilai awal
         DaftarBuku.cek = false;
         kosongkanForm();
     }//GEN-LAST:event_hapusButtonActionPerformed

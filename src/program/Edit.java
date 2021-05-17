@@ -9,6 +9,7 @@ public class Edit extends javax.swing.JFrame {
     int mouseX;
     int mouseY;
 
+    //method untuk kosongkan form
     public void kosongkanForm(){
         idField.setText(null);
         judulField.setText(null);
@@ -255,6 +256,7 @@ public class Edit extends javax.swing.JFrame {
         this.setExtendedState(Edit.ICONIFIED);
     }//GEN-LAST:event_headerMouseClicked
 
+    //dua method dibawah untuk menggeser window
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
         int koordinatX = evt.getXOnScreen();
         int koordinatY = evt.getYOnScreen();
@@ -266,10 +268,12 @@ public class Edit extends javax.swing.JFrame {
         mouseY = evt.getY();
     }//GEN-LAST:event_jPanel2MousePressed
 
+    //method tombol reset
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         kosongkanForm();
     }//GEN-LAST:event_resetButtonActionPerformed
 
+    //method untuk edit buku
     private void editBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBukuActionPerformed
         String id = idField.getText();
         String judul = judulField.getText();
@@ -277,7 +281,10 @@ public class Edit extends javax.swing.JFrame {
         String penerbit = penerbitField.getText();
         String tahun = tahunField.getText();
         
+        //panggil method editBuku di class DaftarBuku untuk edit bukunya
         DaftarBuku.editBuku(id, judul, pengarang, penerbit, tahun);
+        //gunakan if jika cek di class DaftarBuku true maka data sukses diedit
+        //kalau false maka indeks tidak tersedia
         if(DaftarBuku.cek ==true){
             ImageIcon icon = new ImageIcon("src/resources/success.png");
             JOptionPane.showMessageDialog(null, "Data berhasil Diedit!", "Edit Buku", 0, icon);
@@ -285,6 +292,7 @@ public class Edit extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Index tidak tersedia!");
         }
         kosongkanForm();
+        //ubah lagi nilai cek ke false agar kembali ke nilai awalnya
         DaftarBuku.cek = false;
     }//GEN-LAST:event_editBukuActionPerformed
 

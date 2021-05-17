@@ -3,10 +3,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-    //variable untuk menampun user
+    //variable untuk menampung user
     static String user;
-    //membuat array 2d untuk menyimpan account-nya
-    static String account[][]= new String[5][2];
+    //membuat array 2d untuk menyimpan akunnya
+    static String akun[][]= new String[5][2];
    
     //membuat konstruktor untuk class Login
     public Login() {
@@ -202,22 +202,22 @@ public class Login extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         //database akunnya
-        account[0][0] = "Fitri";
-        account[0][1] = "002";
-        account[1][0] = "Fiqri";
-        account[1][1] = "004";
-        account[2][0] = "Dennys";
-        account[2][1] = "032";
-        account[3][0] = "Rahmita";
-        account[3][1] = "034";
-        account[4][0] = "Fadhil";
-        account[4][1] = "036";
+        akun[0][0] = "Fitri";
+        akun[0][1] = "002";
+        akun[1][0] = "Fiqri";
+        akun[1][1] = "004";
+        akun[2][0] = "Dennys";
+        akun[2][1] = "032";
+        akun[3][0] = "Rahmita";
+        akun[3][1] = "034";
+        akun[4][0] = "Fadhil";
+        akun[4][1] = "036";
         
         //codingan untuk mengecek apakah username dan password sesuai
         String user = nameField.getText();
         String password = passwordField.getText();
-        for(int i=0; i<account.length; i++){
-            if(account[i][0].equalsIgnoreCase(user) && account[i][1].equals(password)){
+        for(int i=0; i<akun.length; i++){
+            if(akun[i][0].equalsIgnoreCase(user) && akun[i][1].equals(password)){
                 this.user =user;
                 this.dispose();
                 new DaftarBuku().setVisible(true);
@@ -232,12 +232,13 @@ public class Login extends javax.swing.JFrame {
     //method untuk tombol keluar(exit)
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         ImageIcon icon = new ImageIcon("src/resources/closelogo.png");
+        //JOptionPane untuk konfirmasi
         int jawab = JOptionPane.showOptionDialog(this, 
                     "Apakah anda ingin keluar?", 
                     "Confirm Dialog", 
                     JOptionPane.YES_NO_OPTION, 
                     JOptionPane.QUESTION_MESSAGE, icon, null, null);
-    
+        //kalau jawab yes maka akan keluar dari aplikasi
         if(jawab == JOptionPane.YES_OPTION){
            System.exit(0);
         }

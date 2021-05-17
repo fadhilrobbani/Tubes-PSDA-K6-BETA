@@ -8,11 +8,16 @@ import javax.swing.table.DefaultTableModel;
 
 public class DaftarBuku extends javax.swing.JFrame {
     
-    //database buku
+    /*database buku menggunaka array 2D, dimensi pertama sebagai
+    jumlah data maksimal yang ditampung. dimensi kedua adalah
+    jumlah data pada kolomnya*/
     static String[][]buku = new String[100][5];
-    static boolean cek = false;
+    //untuk cek kondisi, nantinya berguna saat menambah/menghapus/mengedit data
+    static boolean cek = false; 
+    //panjang array yang sudah terisi oleh data yang diinput
     static int top =0;
     
+    //method untuk meng-update tampilan dari array ke table
     public static void updateTabel(String[][]array){
         DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
         int jumlahBaris = model.getRowCount();
@@ -23,6 +28,8 @@ public class DaftarBuku extends javax.swing.JFrame {
         }
         //mengisi table lagi yg sudah diurutkan
         for(int j=0; j<top; j++){
+            /*seleksi if agar array yang array yang sudah dihapus(array diisi 0"
+            tidak ditampilkan*/
             if(array[j][0].equals("0") && array[j][1].equals("0")&&array[j][2].equals("0")&&array[j][3].equals("0")&&array[j][4].equals("0")){
                 System.out.println("yg kosong jangan ditambahkan ke table");
             }else{
@@ -30,10 +37,11 @@ public class DaftarBuku extends javax.swing.JFrame {
                 model.addRow(row);
             }
         }
+        //atur model tabelBuku sesuai DefaultTableModel
         tabelBuku.setModel(model);
     }
     
-    
+    //method untuk menambahkan buku dengan parameter yang berisi data untuk kolomnya
     public static void tambahBuku(String id,String judul,String pengarang,String penerbit,String tahun){
         try {    
             DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
@@ -50,11 +58,15 @@ public class DaftarBuku extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error! "+e);}
     }
     
+    //method untuk menghapus buku dengan parameter id(ID Buku) yang ingin dihapus
     public static void hapusBuku(String id){
         DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
         int index =0;
+        //gunakan loop untuk mencari id yang sesuai di array
         while(index < top){
             if(id.equals(buku[index][0])){
+                //kalau dapat, ingat di array elemen tidak bisa dihapus.
+                //berarti kita isi saja datanya dengan 0
                 buku[index][0]="0";
                 buku[index][1]="0";
                 buku[index][2]="0";
@@ -68,9 +80,11 @@ public class DaftarBuku extends javax.swing.JFrame {
             }
             index++;
         }
+        //panggil method updateTabel untuk mengatur ulang tampilan tabelnya
         updateTabel(buku);
     }
     
+    //method untuk edit buku berparameter kolom-kolom yang akan diedit
     public static void editBuku(String id,String judul,String pengarang,String penerbit,String tahun){
         DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
         int index =0;
@@ -88,14 +102,21 @@ public class DaftarBuku extends javax.swing.JFrame {
             }
             index++;
         }
+        //panggil method updateTabel untuk mengatur ulang tampilan tabelnya
         updateTabel(buku);
     }
     
+    /*method insertionSort untuk mengurutkan arraynya dengan parameter
+    array yang akan diurutkan dan "angka" yaitu kolom yang dijadikan key(patokan pengurutan)*/
     public static void insertionSort(String[][] array, String angka){
         int indexInt = Integer.parseInt(angka);
-        for(int i=0; i<top; i++){
+        for(int i=0; i<top; i++){ //pakai top agar seluruh memori array tidak ikut di loop
             for(int j=i; j>0; j--){
+                /*kondisi jika array setelahnya lebih kecil dari sebelum(konversi dari String 
+                ke integer agar dapat dibandingkan)*/
                 if(Integer.parseInt(array[j][indexInt]) < Integer.parseInt(array[j-1][indexInt])){
+                    //jika kondisi terpenuhi maka swap array-nya
+                    //digunakan loop lagi karena untuk swap yang dimensi kedua juga
                     for (int k = 0; k < 5 ; k++){  
                         String temp = array[j][k];
                         array[j][k]=array[j-1][k];
@@ -105,12 +126,12 @@ public class DaftarBuku extends javax.swing.JFrame {
                 }
             }
         }
+        //panggil method updateTabel untuk mengatur ulang tampilan tabelnya
         updateTabel(array);
     }
    
-    /**
-     * Creates new form DaftarBuku
-     */
+   
+    //construktor untuk class DaftarBuku
     public DaftarBuku() {
         initComponents();
         tabelBuku.getTableHeader().setFont(new Font("Segoe UI",Font.BOLD,12));
@@ -374,23 +395,28 @@ public class DaftarBuku extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    //method untuk tombol tambah yang akan membuka kelas Tambah()
     private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
         new Tambah().setVisible(true);
     }//GEN-LAST:event_tambahButtonActionPerformed
-
+    
+//method untuk tombol edit yang akan membuka kelas Edit()
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         new Edit().setVisible(true);
     }//GEN-LAST:event_editButtonActionPerformed
 
+    //method untuk tombol hapus yang akan membuka kelas Hapus()
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
         new Hapus().setVisible(true);
     }//GEN-LAST:event_hapusButtonActionPerformed
 
+    //method untuk tombol logout yang akan menutup kelas ini dan membuka kelas Login();
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         this.dispose();
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    //method untuk tombol exit
     private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
          ImageIcon icon = new ImageIcon("src/resources/closelogo.png");
         int jawab = JOptionPane.showOptionDialog(this,
@@ -404,14 +430,17 @@ public class DaftarBuku extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_exitButtonMouseClicked
 
+    //method tombol minimize
     private void minimizeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseClicked
           this.setExtendedState(DaftarBuku.ICONIFIED);
     }//GEN-LAST:event_minimizeButtonMouseClicked
 
+    //method untuk mengambil nilai variabel user di class Login dan mengaturnya ke tampilan
     private void userPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_userPropertyChange
         user.setText(Login.user);
     }//GEN-LAST:event_userPropertyChange
 
+    //dua method dibawah ini intinya untuk menggeser window
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         mouseX = evt.getX();
         mouseY = evt.getY();
@@ -423,6 +452,7 @@ public class DaftarBuku extends javax.swing.JFrame {
         this.setLocation(koordinatX-mouseX, koordinatY-mouseY);
     }//GEN-LAST:event_jPanel1MouseDragged
 
+    //method untuk pilihan combo box saat memilih metode pengurutan data
     private void pilihCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihCbActionPerformed
         try {
             int indexComboBox = pilihCb.getSelectedIndex();

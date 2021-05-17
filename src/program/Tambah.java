@@ -9,8 +9,6 @@ public class Tambah extends javax.swing.JFrame {
     int mouseX;
     int mouseY;
     
-    
-    
     //method mengosongkan form
     public void kosongkanForm(){
         idField.setText(null);
@@ -257,6 +255,7 @@ public class Tambah extends javax.swing.JFrame {
         this.setExtendedState(Tambah.ICONIFIED);
     }//GEN-LAST:event_headerMouseClicked
 
+    //dua method dibawah ini untuk menggeser window
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
         int koordinatX = evt.getXOnScreen();
         int koordinatY = evt.getYOnScreen();
@@ -268,16 +267,20 @@ public class Tambah extends javax.swing.JFrame {
         mouseY = evt.getY();
     }//GEN-LAST:event_jPanel2MousePressed
 
+    //method untuk reset(mengosongkan form)
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         kosongkanForm();
     }//GEN-LAST:event_resetButtonActionPerformed
 
+    //method untuk tombol tambah
     private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
         String id = idField.getText();
         String judul = judulField.getText();
         String pengarang = pengarangField.getText();
         String penerbit = penerbitField.getText();
         String tahun = tahunField.getText();
+        
+        //panggil method tambahBuku dari class DaftarBuku untuk menambah buku
         DaftarBuku.tambahBuku(id, judul, pengarang, penerbit, tahun);
         ImageIcon icon = new ImageIcon("src/resources/success.png");
         JOptionPane.showMessageDialog(null, "Data berhasil Ditambahkan!", "Tambah Buku", 0, icon);

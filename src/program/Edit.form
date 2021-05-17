@@ -64,19 +64,14 @@
                           <Component id="judulField" min="-2" pref="385" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="pengarangField" alignment="0" min="-2" pref="385" max="-2" attributes="0"/>
+                      <Component id="penerbitField" min="-2" pref="385" max="-2" attributes="0"/>
+                      <Component id="tahunField" alignment="0" min="-2" pref="385" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="pengarangField" alignment="0" min="-2" pref="385" max="-2" attributes="0"/>
-                              <Component id="penerbitField" min="-2" pref="385" max="-2" attributes="0"/>
-                              <Component id="tahunField" alignment="0" min="-2" pref="385" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="editBuku" min="-2" pref="126" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="resetButton" min="-2" pref="124" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="21" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="editBuku" min="-2" pref="126" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="resetButton" min="-2" pref="124" max="-2" attributes="0"/>
                       </Group>
                       <Component id="idField" max="32767" attributes="0"/>
                   </Group>
