@@ -10,19 +10,25 @@ public class DaftarBuku extends javax.swing.JFrame {
     
     //database buku
     static String[][]buku = new String[100][5];
-    static int index = 0;
+    static boolean cek = false;
+    static int top =0;
     
     public static void updateTabel(String[][]array){
         DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
         int jumlahBaris = model.getRowCount();
+        System.out.println(jumlahBaris);
         //destroy isi table
         for(int i=jumlahBaris-1; i>=0; i--){
             model.removeRow(i);
         }
         //mengisi table lagi yg sudah diurutkan
-        for(int j=0; j<index; j++){
-            Object[]row = {array[j][0],array[j][1],array[j][2],array[j][3],array[j][4]};
-            model.addRow(row);
+        for(int j=0; j<top; j++){
+            if(array[j][0].equals("0") && array[j][1].equals("0")&&array[j][2].equals("0")&&array[j][3].equals("0")&&array[j][4].equals("0")){
+                System.out.println("yg kosong jangan ditambahkan ke table");
+            }else{
+                Object[]row = {array[j][0],array[j][1],array[j][2],array[j][3],array[j][4]};
+                model.addRow(row);
+            }
         }
         tabelBuku.setModel(model);
     }
@@ -30,22 +36,44 @@ public class DaftarBuku extends javax.swing.JFrame {
     
     public static void tambahBuku(String id,String judul,String pengarang,String penerbit,String tahun){
         DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
-        buku [index][0] = id;
-        buku [index][1] = judul;
-        buku [index][2] = pengarang;
-        buku [index][3] = penerbit;
-        buku [index][4] = tahun;        
-        Object[]row ={buku [index][0],buku [index][1],buku [index][2],buku [index][3],buku [index][4]};
+        buku [top][0] = id;
+        buku [top][1] = judul;
+        buku [top][2] = pengarang;
+        buku [top][3] = penerbit;
+        buku [top][4] = tahun;        
+        Object[]row ={buku [top][0],buku [top][1],buku [top][2],buku [top][3],buku [top][4]};
         model.addRow(row);
+        top++;
         tabelBuku.setModel(model);
-        index++;
+    }
+    
+    public static void hapusBuku(String id){
+        DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
+        int jumlahBaris = model.getRowCount();
+        int index =0;
+        while(index < jumlahBaris){
+            if(id.equals(buku[index][0])){
+                buku[index][0]="0";
+                buku[index][1]="0";
+                buku[index][2]="0";
+                buku[index][3]="0";
+                buku[index][4]="0";
+                model.removeRow(index);
+                cek = true;
+                break;
+            }else{
+                cek = false;
+            }
+            index++;
+        }
+        updateTabel(buku);
     }
     
     public static void insertionSort(String[][] array, String angka){
         int indexInt = Integer.parseInt(angka);
-        for(int i=0; i<index; i++){
+        for(int i=0; i<top; i++){
             for(int j=i; j>0; j--){
-                if(Integer.parseInt(array[j][0]) < Integer.parseInt(array[j-1][0])){
+                if(Integer.parseInt(array[j][indexInt]) < Integer.parseInt(array[j-1][indexInt])){
                     for (int k = 0; k < 5 ; k++){  
                         String temp = array[j][k];
                         array[j][k]=array[j-1][k];
