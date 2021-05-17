@@ -4,9 +4,50 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class DaftarBuku extends javax.swing.JFrame {
-
+    
+    //database buku
+    static String[][]buku = new String[100][5];
+    static int index = 0;
+    
+    
+    public static void tambahBuku(String id,String judul,String pengarang,String penerbit,String tahun){
+       DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
+        buku [index][0] = id;
+        buku [index][1] = judul;
+        buku [index][2] = pengarang;
+        buku [index][3] = penerbit;
+        buku [index][4] = tahun;
+        Object[]row ={buku [index][0],buku [index][1],buku [index][2],buku [index][3],buku [index][4]};
+        model.addRow(row);
+        tabelBuku.setModel(model);
+        index++;
+    }
+    
+    public static void insertionSort(String[][] array, String angka){
+        int indexInt = Integer.parseInt(angka);
+        for(int i=1; i<index; i++){
+            int indexSementara = i;
+            for(int j=i; j>=0; j--, indexSementara--){
+                int id1 = Integer.parseInt(array[j][indexInt]);
+                int id2 = Integer.parseInt(array[indexSementara][indexInt]);
+                if(id1 > id2){
+                    String temp;
+                    for(int k=0; k<array[j].length; k++){
+                        temp = array[j][k];
+                        array[j][k] = array[indexSementara][k];
+                        array[indexSementara][k] = temp;        
+                    }
+                }else{
+                    break;
+                }
+                
+            }
+        }
+    }
+   
     /**
      * Creates new form DaftarBuku
      */
@@ -38,7 +79,7 @@ public class DaftarBuku extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         exitButton = new javax.swing.JLabel();
         minimizeButton = new javax.swing.JLabel();
-        sortCb = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -47,15 +88,20 @@ public class DaftarBuku extends javax.swing.JFrame {
 
         tabelBuku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID Buku", "Judul", "Pengarang", "Penerbit", "Tahun"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabelBuku);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -206,10 +252,16 @@ public class DaftarBuku extends javax.swing.JFrame {
             }
         });
 
-        sortCb.setBackground(new java.awt.Color(102, 102, 102));
-        sortCb.setForeground(new java.awt.Color(204, 204, 204));
-        sortCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Urut Berdasarkan ID Buku", "Urut Berdasarkan Tahun" }));
-        sortCb.setOpaque(true);
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Sort by ID Buku");
+        jButton1.setFocusable(false);
+        jButton1.setOpaque(true);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -217,10 +269,10 @@ public class DaftarBuku extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sortCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(163, 163, 163)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addComponent(minimizeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exitButton)
@@ -235,7 +287,7 @@ public class DaftarBuku extends javax.swing.JFrame {
                     .addComponent(exitButton)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(sortCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -311,6 +363,13 @@ public class DaftarBuku extends javax.swing.JFrame {
         this.setLocation(koordinatX-mouseX, koordinatY-mouseY);
     }//GEN-LAST:event_jPanel1MouseDragged
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        insertionSort(buku,"0");
+        System.out.println(buku[0][0]);
+        System.out.println(buku[1][0]);
+        System.out.println(buku[2][0]);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -350,6 +409,7 @@ public class DaftarBuku extends javax.swing.JFrame {
     private javax.swing.JButton editButton;
     private javax.swing.JLabel exitButton;
     private javax.swing.JButton hapusButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -357,8 +417,7 @@ public class DaftarBuku extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logoutButton;
     private javax.swing.JLabel minimizeButton;
-    private javax.swing.JComboBox<String> sortCb;
-    private javax.swing.JTable tabelBuku;
+    private static javax.swing.JTable tabelBuku;
     private javax.swing.JButton tambahButton;
     private javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables
