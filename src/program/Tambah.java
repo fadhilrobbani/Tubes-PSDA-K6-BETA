@@ -9,6 +9,9 @@ public class Tambah extends javax.swing.JFrame {
     int mouseX;
     int mouseY;
     
+    
+    
+    //method mengosongkan form
     public void kosongkanForm(){
         idField.setText(null);
         judulField.setText(null);
@@ -270,6 +273,12 @@ public class Tambah extends javax.swing.JFrame {
     }//GEN-LAST:event_resetButtonActionPerformed
 
     private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
+        String id = idField.getText();
+        String judul = judulField.getText();
+        String pengarang = pengarangField.getText();
+        String penerbit = penerbitField.getText();
+        String tahun = tahunField.getText();
+        DaftarBuku.tambahBuku(id, judul, pengarang, penerbit, tahun);
         ImageIcon icon = new ImageIcon("src/resources/success.png");
         JOptionPane.showMessageDialog(null, "Data berhasil Ditambahkan!", "Tambah Buku", 0, icon);
         kosongkanForm();
