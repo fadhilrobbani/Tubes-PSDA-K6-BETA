@@ -49,9 +49,8 @@ public class DaftarBuku extends javax.swing.JFrame {
     
     public static void hapusBuku(String id){
         DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
-        int jumlahBaris = model.getRowCount();
         int index =0;
-        while(index < jumlahBaris){
+        while(index < top){
             if(id.equals(buku[index][0])){
                 buku[index][0]="0";
                 buku[index][1]="0";
@@ -59,6 +58,26 @@ public class DaftarBuku extends javax.swing.JFrame {
                 buku[index][3]="0";
                 buku[index][4]="0";
                 model.removeRow(index);
+                cek = true;
+                break;
+            }else{
+                cek = false;
+            }
+            index++;
+        }
+        updateTabel(buku);
+    }
+    
+    public static void editBuku(String id,String judul,String pengarang,String penerbit,String tahun){
+        DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
+        int index =0;
+        while(index < top){
+            if(id.equals(buku[index][0])){
+                buku[index][0]=id;
+                buku[index][1]=judul;
+                buku[index][2]=pengarang;
+                buku[index][3]=penerbit;
+                buku[index][4]=tahun;
                 cek = true;
                 break;
             }else{

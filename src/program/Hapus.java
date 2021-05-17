@@ -214,6 +214,7 @@ public class Hapus extends javax.swing.JFrame {
         }else{
              JOptionPane.showMessageDialog(null, "Indeks yang dimasukkan tidak tersedia!");
         }
+        DaftarBuku.cek = false;
         kosongkanForm();
     }//GEN-LAST:event_hapusButtonActionPerformed
 
