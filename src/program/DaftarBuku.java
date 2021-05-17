@@ -12,14 +12,29 @@ public class DaftarBuku extends javax.swing.JFrame {
     static String[][]buku = new String[100][5];
     static int index = 0;
     
+    public static void updateTabel(String[][]array){
+        DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
+        int jumlahBaris = model.getRowCount();
+        //destroy isi table
+        for(int i=jumlahBaris-1; i>=0; i--){
+            model.removeRow(i);
+        }
+        //mengisi table lagi yg sudah diurutkan
+        for(int j=0; j<index; j++){
+            Object[]row = {array[j][0],array[j][1],array[j][2],array[j][3],array[j][4]};
+            model.addRow(row);
+        }
+        tabelBuku.setModel(model);
+    }
+    
     
     public static void tambahBuku(String id,String judul,String pengarang,String penerbit,String tahun){
-       DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
+        DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
         buku [index][0] = id;
         buku [index][1] = judul;
         buku [index][2] = pengarang;
         buku [index][3] = penerbit;
-        buku [index][4] = tahun;
+        buku [index][4] = tahun;        
         Object[]row ={buku [index][0],buku [index][1],buku [index][2],buku [index][3],buku [index][4]};
         model.addRow(row);
         tabelBuku.setModel(model);
@@ -28,24 +43,19 @@ public class DaftarBuku extends javax.swing.JFrame {
     
     public static void insertionSort(String[][] array, String angka){
         int indexInt = Integer.parseInt(angka);
-        for(int i=1; i<index; i++){
-            int indexSementara = i;
-            for(int j=i; j>=0; j--, indexSementara--){
-                int id1 = Integer.parseInt(array[j][indexInt]);
-                int id2 = Integer.parseInt(array[indexSementara][indexInt]);
-                if(id1 > id2){
-                    String temp;
-                    for(int k=0; k<array[j].length; k++){
-                        temp = array[j][k];
-                        array[j][k] = array[indexSementara][k];
-                        array[indexSementara][k] = temp;        
-                    }
-                }else{
-                    break;
+        for(int i=0; i<index; i++){
+            for(int j=i; j>0; j--){
+                if(Integer.parseInt(array[j][0]) < Integer.parseInt(array[j-1][0])){
+                    for (int k = 0; k < 5 ; k++){  
+                        String temp = array[j][k];
+                        array[j][k]=array[j-1][k];
+                        array[j-1][k] = temp ;
+                   }
+                    
                 }
-                
             }
         }
+        updateTabel(array);
     }
    
     /**
@@ -365,9 +375,6 @@ public class DaftarBuku extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         insertionSort(buku,"0");
-        System.out.println(buku[0][0]);
-        System.out.println(buku[1][0]);
-        System.out.println(buku[2][0]);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
