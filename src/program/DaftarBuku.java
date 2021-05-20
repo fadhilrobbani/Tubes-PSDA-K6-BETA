@@ -15,7 +15,7 @@ public class DaftarBuku extends javax.swing.JFrame {
     //untuk cek kondisi, nantinya berguna saat menambah/menghapus/mengedit data
     static boolean cek = false; 
     //panjang array yang sudah terisi oleh data yang diinput
-    static int top =3;
+    static int top =7;
     
     //isi array sementara biar gak capek menambahkan data dulu :)
     public static void isiSementara(){
@@ -34,13 +34,32 @@ public class DaftarBuku extends javax.swing.JFrame {
         buku[2][2] = "Budi Raharjo";
         buku[2][3] = "Informatika";
         buku[2][4] = "2019";
+        buku[3][0] = "090";
+        buku[3][1] = "Computers and Programming";
+        buku[3][2] = "Francis Scheid";
+        buku[3][3] = "McGraww-Hill";
+        buku[3][4] = "1983";
+        buku[4][0] = "034";
+        buku[4][1] = "Matematika Diskrit";
+        buku[4][2] = "Rinaldi Munir";
+        buku[4][3] = "Informatika";
+        buku[4][4] = "2012";
+        buku[5][0] = "033";
+        buku[5][1] = "Statistik Industri";
+        buku[5][2] = "Akhmad Fauzi";
+        buku[5][3] = "Erlangga";
+        buku[5][4] = "2008";
+        buku[6][0] = "059";
+        buku[6][1] = "Turbo Pascal: Teori dan Aplikasi Program Komputer";
+        buku[6][2] = "Jogiyanto";
+        buku[6][3] = "Andi Offset";
+        buku[6][4] = "1999";
     }
     
     //method untuk meng-update tampilan dari array ke table
     public static void updateTabel(String[][]array){
         DefaultTableModel model = (DefaultTableModel)tabelBuku.getModel();
         int jumlahBaris = model.getRowCount();
-        System.out.println(jumlahBaris);
         //destroy isi table
         for(int i=jumlahBaris-1; i>=0; i--){
             model.removeRow(i);
@@ -50,7 +69,7 @@ public class DaftarBuku extends javax.swing.JFrame {
             /*seleksi if agar array yang array yang sudah dihapus(array diisi 0"
             tidak ditampilkan*/
             if(array[j][0].equals("0") && array[j][1].equals("0")&&array[j][2].equals("0")&&array[j][3].equals("0")&&array[j][4].equals("0")){
-                System.out.println("yg kosong jangan ditambahkan ke table");
+                //intinya yang berisi 0 tidak ditampilkan
             }else{
                 Object[]row = {array[j][0],array[j][1],array[j][2],array[j][3],array[j][4]};
                 model.addRow(row);

@@ -214,6 +214,14 @@ public class Hapus extends javax.swing.JFrame {
         String id = idField.getText();
         DaftarBuku.hapusBuku(id);
         ImageIcon icon = new ImageIcon("src/resources/success.png");
+        
+        //untuk mengecek maksimal idbuku adalah 3 digit
+        if(id.length() > 3){
+            JOptionPane.showMessageDialog(null, "Format ID buku maksimal 3 digit angka!");
+            idField.setText(null);
+            return;
+        }
+        
         //seleksi if jika cek di class DaftarBuku bernilai true maka data sukses dihapus
         //jika false maka indeks tidak tersedia
         if(DaftarBuku.cek == true){
