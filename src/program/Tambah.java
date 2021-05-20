@@ -280,11 +280,30 @@ public class Tambah extends javax.swing.JFrame {
         String penerbit = penerbitField.getText();
         String tahun = tahunField.getText();
         
-        //panggil method tambahBuku dari class DaftarBuku untuk menambah buku
-        DaftarBuku.tambahBuku(id, judul, pengarang, penerbit, tahun);
-        ImageIcon icon = new ImageIcon("src/resources/success.png");
-        JOptionPane.showMessageDialog(null, "Data berhasil Ditambahkan!", "Tambah Buku", 0, icon);
-        kosongkanForm();
+        //untuk mengecek apakah sudah ada id buku yang sama di daftar buku
+        for(int i=0; i<DaftarBuku.top; i++){
+            if(id.equals(DaftarBuku.buku[i][0])){
+                JOptionPane.showMessageDialog(null, "ID buku "+id+" sudah tersedia!\nSilahkan Coba dengan ID buku yang lain!" );
+                idField.setText(null);
+                return;
+            }
+        }
+       
+        try {
+            //pengecekan aja kalau error berarti id atau tahun bukan dalam integer/kosong
+            int idInt = Integer.parseInt(id);
+            int tahunInt = Integer.parseInt(tahun);
+            //panggil method tambahBuku dari class DaftarBuku untuk menambah buku
+            DaftarBuku.tambahBuku(id, judul, pengarang, penerbit, tahun);
+            ImageIcon icon = new ImageIcon("src/resources/success.png");
+            JOptionPane.showMessageDialog(null, "Data berhasil Ditambahkan!", "Tambah Buku", 0, icon);
+            kosongkanForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ID buku dan tahun harus wajib diisi dan dalam format angka!");
+        }
+
+        
+        
     }//GEN-LAST:event_tambahButtonActionPerformed
 
     /**

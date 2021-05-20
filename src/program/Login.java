@@ -211,7 +211,7 @@ public class Login extends javax.swing.JFrame {
         akun[3][0] = "Rahmita";
         akun[3][1] = "034";
         akun[4][0] = "Fadhil";
-        akun[4][1] = "036";
+        akun[4][1] = "036";                              
         
         //codingan untuk mengecek apakah username dan password sesuai
         String user = nameField.getText();
@@ -247,7 +247,7 @@ public class Login extends javax.swing.JFrame {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         this.setExtendedState(Login.ICONIFIED);
     }//GEN-LAST:event_jLabel3MouseClicked
-
+    //w method setelah ini untuk menggeser window
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
         mouseX = evt.getX();
         mouseY = evt.getY();                        

@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class DaftarBuku extends javax.swing.JFrame {
     
-    /*database buku menggunaka array 2D, dimensi pertama sebagai
+    /*database buku menggunakan array 2D, dimensi pertama sebagai
     jumlah data maksimal yang ditampung. dimensi kedua adalah
     jumlah data pada kolomnya*/
     static String[][]buku = new String[100][5];
