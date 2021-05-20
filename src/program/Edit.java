@@ -1,5 +1,6 @@
 package program;
 
+import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -16,6 +17,13 @@ public class Edit extends javax.swing.JFrame {
         pengarangField.setText(null);
         penerbitField.setText(null);
         tahunField.setText(null);            
+    }
+    
+     //method untuk font default dari text field
+    public void setFont(){
+        idField.setText(null);
+        idField.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 12));
+        idField.setForeground(new java.awt.Color(0,0,0));
     }
     
     public Edit() {
@@ -49,7 +57,15 @@ public class Edit extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
+        idField.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        idField.setForeground(new java.awt.Color(153, 153, 153));
+        idField.setText("    Contoh: 078");
         idField.setBorder(null);
+        idField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                idFieldKeyPressed(evt);
+            }
+        });
 
         judulField.setBorder(null);
 
@@ -117,11 +133,10 @@ public class Edit extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(judulField, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(idField)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(judulField, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pengarangField, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(penerbitField, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tahunField, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,8 +145,7 @@ public class Edit extends javax.swing.JFrame {
                                 .addComponent(editBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(idField))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
@@ -280,21 +294,39 @@ public class Edit extends javax.swing.JFrame {
         String pengarang = pengarangField.getText();
         String penerbit = penerbitField.getText();
         String tahun = tahunField.getText();
-        
-        //panggil method editBuku di class DaftarBuku untuk edit bukunya
-        DaftarBuku.editBuku(id, judul, pengarang, penerbit, tahun);
-        //gunakan if jika cek di class DaftarBuku true maka data sukses diedit
-        //kalau false maka indeks tidak tersedia
-        if(DaftarBuku.cek ==true){
-            ImageIcon icon = new ImageIcon("src/resources/success.png");
-            JOptionPane.showMessageDialog(null, "Data berhasil Diedit!", "Edit Buku", 0, icon);
-        }else{
-            JOptionPane.showMessageDialog(null, "Index tidak tersedia!");
+          
+        //untuk mengecek maksimal idbuku adalah 3 digit
+        if(id.length() > 3){
+            JOptionPane.showMessageDialog(null, "Format ID buku maksimal 3 digit angka!");
+            return;
         }
-        kosongkanForm();
-        //ubah lagi nilai cek ke false agar kembali ke nilai awalnya
-        DaftarBuku.cek = false;
+        
+        try {
+            //pengecekan aja kalau error berarti id atau tahun bukan dalam integer/kosong
+            int idInt = Integer.parseInt(id);
+            int tahunInt = Integer.parseInt(tahun);
+            //panggil method editBuku di class DaftarBuku untuk edit bukunya
+            DaftarBuku.editBuku(id, judul, pengarang, penerbit, tahun);
+            //gunakan if, jika cek di class DaftarBuku true maka data sukses diedit
+            //kalau false maka indeks tidak tersedia
+            if(DaftarBuku.cek ==true){
+                ImageIcon icon = new ImageIcon("src/resources/success.png");
+                JOptionPane.showMessageDialog(null, "Data berhasil Diedit!", "Edit Buku", 0, icon);
+            }else{
+                JOptionPane.showMessageDialog(null, "ID buku tidak tersedia!");
+            }
+            //ubah lagi nilai cek ke false agar kembali ke nilai awalnya
+            DaftarBuku.cek = false;       
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ID buku dan tahun harus wajib diisi dan dalam format angka!");
+        }
     }//GEN-LAST:event_editBukuActionPerformed
+
+    private void idFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idFieldKeyPressed
+        if(idField.getText().equals("    Contoh: 078")){
+            setFont();
+        }
+    }//GEN-LAST:event_idFieldKeyPressed
 
     /**
      * @param args the command line arguments

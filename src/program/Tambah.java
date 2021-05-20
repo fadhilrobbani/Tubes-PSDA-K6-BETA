@@ -1,5 +1,6 @@
 package program;
 
+import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -17,7 +18,14 @@ public class Tambah extends javax.swing.JFrame {
         penerbitField.setText(null);
         tahunField.setText(null);            
     }
-
+    
+    //method untuk font default dari text field
+    public void setFont(){
+        idField.setText(null);
+        idField.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 12));
+        idField.setForeground(new java.awt.Color(0,0,0));
+    }
+    
     public Tambah() {
         initComponents();
     }
@@ -49,7 +57,16 @@ public class Tambah extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
+        idField.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        idField.setForeground(new java.awt.Color(153, 153, 153));
+        idField.setText("    Contoh: 078");
         idField.setBorder(null);
+        idField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        idField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                idFieldKeyPressed(evt);
+            }
+        });
 
         judulField.setBorder(null);
 
@@ -288,6 +305,12 @@ public class Tambah extends javax.swing.JFrame {
                 return;
             }
         }
+        
+        //untuk mengecek maksimal idbuku adalah 3 digit
+        if(id.length() > 3){
+            JOptionPane.showMessageDialog(null, "Format ID buku maksimal 3 digit angka!");
+            return;
+        }
        
         try {
             //pengecekan aja kalau error berarti id atau tahun bukan dalam integer/kosong
@@ -305,6 +328,13 @@ public class Tambah extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_tambahButtonActionPerformed
+
+    //method yang akan reset ifField saat menekan tombol jika syarat terpenuhi
+    private void idFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idFieldKeyPressed
+        if(idField.getText().equals("    Contoh: 078")){
+            setFont();
+        }
+    }//GEN-LAST:event_idFieldKeyPressed
 
     /**
      * @param args the command line arguments

@@ -15,7 +15,26 @@ public class DaftarBuku extends javax.swing.JFrame {
     //untuk cek kondisi, nantinya berguna saat menambah/menghapus/mengedit data
     static boolean cek = false; 
     //panjang array yang sudah terisi oleh data yang diinput
-    static int top =0;
+    static int top =3;
+    
+    //isi array sementara biar gak capek menambahkan data dulu :)
+    public static void isiSementara(){
+        buku[0][0] = "008";
+        buku[0][1] = "Dasar Pemrograman Java";
+        buku[0][2] = "Ady Wicaksono";
+        buku[0][3] = "Elex Media Komputindo";
+        buku[0][4] = "2002";
+        buku[1][0] = "002";
+        buku[1][1] = "Pemrograman Pascal I";
+        buku[1][2] = "Abdul Khadir";
+        buku[1][3] = "Andi";
+        buku[1][4] = "1999";
+        buku[2][0] = "010";
+        buku[2][1] = "Kumpulan Solusi Pemrograman Phyton";
+        buku[2][2] = "Budi Raharjo";
+        buku[2][3] = "Informatika";
+        buku[2][4] = "2019";
+    }
     
     //method untuk meng-update tampilan dari array ke table
     public static void updateTabel(String[][]array){
@@ -156,6 +175,7 @@ public class DaftarBuku extends javax.swing.JFrame {
         editButton = new javax.swing.JButton();
         hapusButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         exitButton = new javax.swing.JLabel();
@@ -272,6 +292,12 @@ public class DaftarBuku extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jLabel1PropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -284,6 +310,10 @@ public class DaftarBuku extends javax.swing.JFrame {
                     .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tambahButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(19, 19, 19))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +328,9 @@ public class DaftarBuku extends javax.swing.JFrame {
                 .addComponent(hapusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(jLabel1)
+                .addContainerGap(173, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -466,6 +498,12 @@ public class DaftarBuku extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pilihCbActionPerformed
 
+    //method untuk menampilkan isi buku sementara saat aplikasi diluncurkan
+    private void jLabel1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jLabel1PropertyChange
+        isiSementara();
+        updateTabel(buku);
+    }//GEN-LAST:event_jLabel1PropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -505,6 +543,7 @@ public class DaftarBuku extends javax.swing.JFrame {
     private javax.swing.JButton editButton;
     private javax.swing.JLabel exitButton;
     private javax.swing.JButton hapusButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
